@@ -25,9 +25,74 @@ articles.get('/all', (req, res) => {
 })
 
 
+articles.post('/update', (req, res) => {
+
+    const data_time = new Date();
+    const userData = {
+        id: req.body.id,
+        article: req.body.article,
+        author: req.body.author,
+        section: req.body.section,
+        tag: req.body.tag,
+        title: req.body.title,
+        data_time: data_time
+    }
+    console.log(userData);
 
 
+    Article.update( userData,
+        {where: { id: userData.id}}).then(() => {
+        console.log("Done");
+        res.json({ "ok": "okay"})
+      }).catch(err=>{
+        res.send('error: ' + err)
+    })
+})
+
+articles.post('/add', (req, res) => {
+
+    const data_time = new Date();
+    const userData = {
+        id: req.body.id,
+        article: req.body.article,
+        author: req.body.author,
+        section: req.body.section,
+        tag: req.body.tag,
+        title: req.body.title,
+        data_time: data_time
+    }
+    console.log(userData);
 
 
+    Article.create(userData).then(() => {
+        console.log("Done");
+        res.json({ "ok": "okay"})
+      }).catch(err=>{
+        res.send('error: ' + err)
+    })
+})
+
+articles.post('/delete', (req, res) => {
+
+    const data_time = new Date();
+    const userData = {
+        id: req.body.id,
+        article: req.body.article,
+        author: req.body.author,
+        section: req.body.section,
+        tag: req.body.tag,
+        title: req.body.title,
+        data_time: data_time
+    }
+    console.log(userData);
+
+
+    Article.destroy( {where: { id: userData.id}}).then(() => {
+        console.log("Done");
+        res.json({ "ok": "okay"})
+      }).catch(err=>{
+        res.send('error: ' + err)
+    })
+})
 
 module.exports = articles;
